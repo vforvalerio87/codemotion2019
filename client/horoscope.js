@@ -6,14 +6,14 @@ const protoLoader = require("@grpc/proto-loader");
 const IPFS = require("ipfs");
 const Web3 = require("web3");
 
-const { ethereumEndpoint, serviceId } = require("./../config.js");
+const { ethereumEndpoint, clientIpfsConfig, serviceId } = require("./../config.js");
 
 const { abi, networks } = require("./../build/contracts/Registry.json");
 
 
 async function main() {
 
-  // Get service endpoint and definition from registry
+  // Get instance of registry contract
   const web3 = new Web3(ethereumEndpoint);
   const networkId = await web3.eth.net.getId();
   const account = (await web3.eth.getAccounts())[0];
@@ -23,15 +23,19 @@ async function main() {
     networks[networkId].address
   );
 
+  // Get service registration from service registrations mapping in contract
   registry.methods.serviceRegistrations(
     web3.utils.asciiToHex(serviceId)
   ).call().then(async (serviceRegistration) => {
 
+    // Get service endpoint and service definition IPFS hash from service registration
     const { endpoint, serviceDefinitionURI } = serviceRegistration;
 
-    // Get service definition from IPFS, save to temp file
-    const ipfs = await IPFS.create();
+    // Start IPFS node
+    // Specifying custom config to run a service IPFS node and a client IPFS node in parallel
+    const ipfs = await IPFS.create(clientIpfsConfig);
 
+    // Get service definition from IPFS, save to temp file
     const tmpFile = tmp.fileSync();
 
     ipfs.cat(serviceDefinitionURI, (err, file) => {
@@ -40,7 +44,7 @@ async function main() {
       fs.writeFileSync(tmpFile.fd, file.toString("utf8"));
 
 
-      // Create IPFS client
+      // Create gRPC client
       const package = grpc.loadPackageDefinition(
         protoLoader.loadSync(tmpFile.name)
       ).horoscope;
