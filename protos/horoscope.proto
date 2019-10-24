@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package horoscope;
+
+service Horoscope {
+  rpc GetHoroscope (HoroscopeRequest) returns (HoroscopeResponse);
+}
+
+message HoroscopeRequest {
+  string sign = 1;
+}
+
+message HoroscopeResponse {
+  string prediction = 1;
+}
