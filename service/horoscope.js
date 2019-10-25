@@ -44,6 +44,8 @@ async function main() {
   const result = await ipfs.addFromFs(protoPath);
   const ipfsHash = result[0].hash;
 
+  console.log("IPFS HASH:", `https://ipfs.io/ipfs/${ipfsHash}`);
+
 
   // Get instance of registry contract
   const web3 = new Web3(ethereumEndpoint);
