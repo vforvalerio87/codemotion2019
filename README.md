@@ -1,4 +1,4 @@
-# Decentralized gRPC Service Platform
+# decentralized grpc service platform
 
 ## Introduction
 This is a sample decentralized service platform powered by gRPC, Ethereum, IPFS and Lightning Network.  
@@ -25,3 +25,14 @@ Built for Codemotion Milan 2019:
 
 ## Slides and video
 Coming after the talk
+
+## Resources
+- [grpc.io: high performance, open-source universal RPC framework](https://grpc.io/)
+- [ipfs.io: peer-to-peer hypermedia protocol](https://ipfs.io/)
+- [js-ipfs: IPFS implementation in JavaScript](https://github.com/ipfs/js-ipfs)
+- [Ethereum: global, open-source platform for decentralized applications](https://www.ethereum.org/)
+- [Solidity: Ethereum smart contracts language documentation](https://solidity.readthedocs.io/en/v0.5.12/)
+- [Truffle suite: tools for local smart contract development](https://www.trufflesuite.com/)
+- [web3.js: library to interact with Ethereum nodes](https://web3js.readthedocs.io/en/v1.2.2/)
+- [Lightning Network: scalable, instant Bitcoin/Blockchain Transactions](https://lightning.network/)
+- [LND, the Lightning Network Daemon: gRPC API reference documentation](https://api.lightning.community/#lnd-grpc-api-reference)
