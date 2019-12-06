@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  "ethereumEndpoint": "ws://localhost:9545",
+  "ethereumEndpoint": "https://terminal.co/networks/ganache_24e13b3187d754c8df1c6a0ae74b070/ceec68a33ff30475",
 
   "serviceIpfsConfig": {
     "repo": path.resolve(

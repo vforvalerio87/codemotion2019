@@ -2,7 +2,7 @@
   "name": "codemotion2019",
   "version": "0.0.1",
   "scripts": {
-    "network": "truffle develop",
+    "network": "ganache-cli --fork https://goerli.infura.io/v3/7a9e852ed54a4c8b937503193164393a",
     "compile": "truffle compile",
     "deploy": "truffle migrate",
     "listServices": "truffle exec scripts/listServices.js",
@@ -12,7 +12,11 @@
   "author": "Valerio Versace <mail@valerioversace.it>",
   "license": "MIT",
   "devDependencies": {
-    "truffle": "5.0.41"
+    "@terminal-packages/cli": "^1.0.16",
+    "@terminal-packages/sdk": "^1.0.40",
+    "ganache-cli": "^6.7.0",
+    "truffle": "5.0.41",
+    "truffle-hdwallet-provider": "^1.0.17"
   },
   "dependencies": {
     "@grpc/proto-loader": "0.5.2",

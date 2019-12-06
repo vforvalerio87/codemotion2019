@@ -1,0 +1,27 @@
+# The name for the project you wish to create these resources in
+project: codemotion2019
+# These are descriptions of resources that will be created
+resources:
+  #For ganaches
+  ganaches:
+      # ganache name so you can identify it on the platform
+      - name: forked_ganache
+        # where do you want to place your new ganache whithin the platform (can create new folder)
+        folder: ganache
+        # Other ganache-cli like options
+        # want a forked network? specify the tag of the net you want to fork from.
+        forkNetwork: main
+        # at what block height? 
+        forkBlockNumber: 8567000
+        # Here you can not only unlock accounts by public address, but also ensure a minimal balance
+        accounts: 
+            # account to be unlocked
+          - address: "0x594e25Bbc8d95c0b16a64b11CbC1FBc2923A14a9"
+            balance: "1000"
+          - address: "0xbcdE6F31C93dB36408F3EA31F6e4cDf89366728E"
+            balance: "1000"
+          - address: "0x8d2d3453647D68ef4bC751A054Bb5D662c195029"
+            balance: "1000"
+          - address: "0x6DCfAb8140Ef8f38035feDBa3AF71898882A60Aa"
+            balance: "1000"
+        mnemonic: "video absent build angry loan ship worry solution hip tail eagle horn"
