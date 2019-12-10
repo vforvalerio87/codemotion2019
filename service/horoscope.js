@@ -1,11 +1,17 @@
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
 const IPFS = require("ipfs");
-const Web3 = require("web3");
+const ethers = require('ethers');
 
 const { ethereumEndpoint, serviceIpfsConfig, serviceId, endpoint, protoPath } = require("./../config.js");
 
-const { abi, networks } = require("./../build/contracts/Registry.json");
+const { abi, networks } = require("./../build/Registry.json");
+
+const bytes32 = ethers.utils.formatBytes32String;
+
+
+const provider = new ethers.providers.JsonRpcProvider(ethereumEndpoint);
+const signer = provider.getSigner(0);
 
 
 const package = grpc.loadPackageDefinition(
@@ -48,34 +54,29 @@ async function main() {
 
 
   // Get instance of registry contract
-  const web3 = new Web3(ethereumEndpoint);
-  const networkId = await web3.eth.net.getId();
-  const account = (await web3.eth.getAccounts())[0];
+  const { chainId } = await provider.getNetwork();
 
-  const registry = new web3.eth.Contract(
+  let registry = new ethers.Contract(
+    networks[chainId].address,
     abi,
-    networks[networkId].address
+    provider
   );
+  registry = registry.connect(signer);
 
 
   // Register service in the smart contract
-  registry.methods.registerService(
-    web3.utils.asciiToHex(serviceId),
+  await registry.registerService(
+    bytes32(serviceId),
     ipfsHash,
-    endpoint,
-  ).send({
-    "from": account,
-    "gas": 200000
-  }).then(receipt => {
-    console.log("RECEIPT:", receipt);
+    endpoint
+  );
 
-    // Start gRPC service
-    const server = new grpc.Server();
-    server.addService(package.Horoscope.service, { getHoroscope });
-    server.bind("0.0.0.0:8099", grpc.ServerCredentials.createInsecure());
-    server.start();
-  });
-  
+  console.log(await registry.serviceRegistrations(bytes32(serviceId)));
+
+  const server = new grpc.Server();
+  server.addService(package.Horoscope.service, { getHoroscope });
+  server.bind("0.0.0.0:8099", grpc.ServerCredentials.createInsecure());
+  server.start();
 }
 
 main();

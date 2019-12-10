@@ -2,23 +2,24 @@
   "name": "codemotion2019",
   "version": "0.0.1",
   "scripts": {
-    "network": "truffle develop",
-    "compile": "truffle compile",
-    "deploy": "truffle migrate",
-    "listServices": "truffle exec scripts/listServices.js",
     "startService": "node service/horoscope.js",
     "callService": "node client/horoscope.js"
   },
   "author": "Valerio Versace <mail@valerioversace.it>",
   "license": "MIT",
   "devDependencies": {
-    "truffle": "5.0.41"
+    "mocha": "6.2.2",
+    "chai": "4.2.0",
+    "ganache-cli": "6.7.0",
+    "@nomiclabs/buidler": "1.0.1",
+    "@nomiclabs/buidler-ethers": "1.0.1",
+    "ethereum-waffle": "2.1.0"
   },
   "dependencies": {
     "@grpc/proto-loader": "0.5.2",
     "grpc": "1.24.1",
     "ipfs": "0.39.0",
     "tmp": "0.1.0",
-    "web3": "1.2.2"
+    "ethers": "4.0.39"
   }
 }
