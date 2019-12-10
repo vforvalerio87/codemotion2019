@@ -8,19 +8,18 @@ const Web3 = require("web3");
 
 const { ethereumEndpoint, clientIpfsConfig, serviceId } = require("./../config.js");
 
-const { abi, networks } = require("./../build/contracts/Registry.json");
+const { abiDefinition, deployedAddress } = require("./../build/contracts/Registry.json");
 
 
 async function main() {
 
   // Get instance of registry contract
   const web3 = new Web3(ethereumEndpoint);
-  const networkId = await web3.eth.net.getId();
   const account = (await web3.eth.getAccounts())[0];
 
   const registry = new web3.eth.Contract(
-    abi,
-    networks[networkId].address
+    abiDefinition,
+    deployedAddress
   );
 
   // Get service registration from service registrations mapping in contract

@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  "ethereumEndpoint": "ws://localhost:9545",
+  "ethereumEndpoint": "ws://localhost:8555",
 
   "serviceIpfsConfig": {
     "repo": path.resolve(

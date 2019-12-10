@@ -2,17 +2,12 @@
   "name": "codemotion2019",
   "version": "0.0.1",
   "scripts": {
-    "network": "truffle develop",
-    "compile": "truffle compile",
-    "deploy": "truffle migrate",
-    "listServices": "truffle exec scripts/listServices.js",
-    "startService": "node service/horoscope.js",
-    "callService": "node client/horoscope.js"
+    "test": "embark test"
   },
   "author": "Valerio Versace <mail@valerioversace.it>",
   "license": "MIT",
   "devDependencies": {
-    "truffle": "5.0.41"
+    "embark": "4.1.1"
   },
   "dependencies": {
     "@grpc/proto-loader": "0.5.2",
